@@ -1,11 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Components/Header';
 import Link from 'next/link';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto-play carousel setiap 4 detik
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+    }, 4000); // Ganti slide setiap 4 detik
+
+    return () => clearInterval(interval); // Cleanup saat component unmount
+  }, []);
 
   const featuredProducts = [
     { 
@@ -39,19 +48,19 @@ export default function Home() {
     {
       id: 1,
       title: 'Valentine Cookie Tin',
-      image: '/images/product-1.jpg', // Ganti dengan path gambar Anda
+      image: '/images/cookie7.png', // Ganti dengan path gambar Anda
       alt: 'Valentine Cookie Tin Limited Edition'
     },
     {
       id: 2,
       title: 'Classic Assortment Box',
-      image: '/images/product-2.jpg', // Ganti dengan path gambar Anda
+      image: '/images/cookie31.png', // Ganti dengan path gambar Anda
       alt: 'Classic Assortment Cookie Box'
     },
     {
       id: 3,
       title: 'Premium Gift Collection',
-      image: '/images/product-3.jpg', // Ganti dengan path gambar Anda
+      image: '/images/cookie32.png', // Ganti dengan path gambar Anda
       alt: 'Premium Gift Cookie Collection'
     },
   ];
@@ -65,7 +74,32 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF8F3]">
+    <>
+      <style jsx global>{`
+        @keyframes floatSlow {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) rotate(-12deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(-12deg);
+          }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+      `}</style>
+      
+      <div className="min-h-screen bg-[#FFF8F3]">
       <Header />
       
       {/* Hero Section - Inspired by reference but unique layout */}
@@ -149,13 +183,16 @@ export default function Home() {
                               : 'opacity-0 scale-95 z-0'
                           }`}
                         >
-                          {/* Full image container */}
+                          {/* Full image container dengan animasi mengambang */}
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="relative w-full h-full max-h-[85%] flex items-center justify-center">
                               <img
                                 src={slide.image}
                                 alt={slide.alt}
-                                className="w-full h-full object-contain drop-shadow-2xl"
+                                className="w-full h-full object-contain drop-shadow-2xl animate-float-slow"
+                                style={{
+                                  animation: 'floatSlow 3s ease-in-out infinite'
+                                }}
                               />
                             </div>
                           </div>
@@ -422,5 +459,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
