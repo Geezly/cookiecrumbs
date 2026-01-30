@@ -349,7 +349,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonial Section dengan Card yang memiliki tempat untuk 3 gambar cookies */}
+      {/* Testimonial Section */}
       <section className="py-24 px-6 bg-white">
         <div className="container mx-auto max-w-[900px]">
           <div className="relative">
@@ -462,8 +462,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Cookies for Every Occasion Section */}
-      <section id="occasions" className="py-24 px-6 bg-[#F5F2EE]">
+      {/* Cookies for Every Occasion Section - Background matched to Fan Favorites */}
+      <section id="occasions" className="py-24 px-6 bg-[#F5E6D3]">
         <div className="container mx-auto max-w-[1400px]">
           <div className="text-left mb-16">
             <h2 className="text-5xl md:text-6xl font-black text-[#0033A0] mb-4">
@@ -553,8 +553,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The Cookie That Became a New York Institution Section */}
-      <section className="py-24 px-6 bg-[#FFF8F3]">
+      {/* The Cookie That Became a New York Institution Section - Background now White */}
+      <section className="py-24 px-6 bg-white">
         <div className="container mx-auto max-w-[1400px]">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left - Image */}
@@ -586,6 +586,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* CTA Section */}
       <section className="py-24 px-6 bg-gradient-to-r from-[#8B4444] to-[#A85858]">
         <div className="container mx-auto text-center max-w-4xl">
