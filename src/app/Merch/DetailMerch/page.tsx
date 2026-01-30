@@ -57,6 +57,24 @@ export default function DetailMerchPage() {
       tags: ['Valentine Edition', 'NEW'], 
       desc: 'Tas praktis untuk membawa semua keperluan kencan atau hadiah Valentine Anda dengan gaya yang tetap tematik.' 
     },
+    { 
+      id: 6, 
+      name: 'TUMBLR', 
+      price: 'Rp 250.000', 
+      category: 'AKSESORIS', 
+      images: ['/images/botol01.png'], 
+      tags: [], 
+      desc: 'Lengkapi koleksi eksklusif Anda dengan Rose Crumbs Signature Tumblr, bagian dari koleksi resmi official merchandise kami. Dirancang dengan estetika vintage-romantic yang manis, tumbler ini bukan sekadar wadah minuman, melainkan pernyataan gaya bagi para pecinta keindahan.' 
+    },
+     { 
+      id: 7, 
+      name: 'BAG CHARM CAT', 
+      price: 'Rp 40.000', 
+      category: 'AKSESORIS', 
+      images: ['/images/ganci3.png'], 
+      tags: [], 
+      desc: 'Sentuhan kecil yang membawa perubahan besar pada penampilan tas Anda. Gantungan tas (bag charm) ini dirancang khusus untuk Anda yang menyukai detail handmade yang unik, manis, dan penuh karakter.' 
+    },
   ], []);
 
   // Cari produk berdasarkan ID
