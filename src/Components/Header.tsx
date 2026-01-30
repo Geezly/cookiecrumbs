@@ -20,7 +20,9 @@ export default function Header() {
 
   const menuItems = [
     { name: 'Order', href: '/Order' },
+
     { name: 'Event', href: '/Event' },
+
     { name: 'Merch', href: '/Merch' },
   ];
 
@@ -64,7 +66,7 @@ export default function Header() {
                 scrolled ? 'w-16 h-16' : 'w-24 h-24'
               }`}>
                 <Image
-                  src="/images/logokueh.png"
+                  src="/images/logo-text.png"
                   alt="Rose Crumbs Logo"
                   fill
                   className="object-contain"

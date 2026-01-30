@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 import Link from 'next/link';
 
 export default function Home() {
@@ -65,6 +66,42 @@ export default function Home() {
     },
   ];
 
+  // Data produk untuk Shop Fan Favorites
+  const fanFavorites = [
+    {
+      id: 1,
+      name: "Valentine's Day Tin Gift Set",
+      description: "Kaleng eksklusif berisi 24 cookie spesial Valentine dengan desain romantis",
+      image: "/images/cookie7.png",
+      badge: "LIMITED EDITION",
+      badgeColor: "from-[#FF6B6B] to-[#FF8E53]"
+    },
+    {
+      id: 2,
+      name: "Dark Days of Winter Assortment",
+      description: "18 cookie cokelat gelap dengan rasa musim dingin yang kaya dan hangat",
+      image: "/images/cookie17.png",
+      badge: "SEASONAL",
+      badgeColor: "from-[#0033A0] to-[#0066CC]"
+    },
+    {
+      id: 3,
+      name: "Signature Cookie Assortment",
+      description: "Koleksi 20 cookie terbaik dengan berbagai rasa klasik pilihan pelanggan",
+      image: "/images/cookie6.png",
+      badge: "BEST SELLER",
+      badgeColor: "from-[#00A86B] to-[#00CC88]"
+    },
+    {
+      id: 4,
+      name: "Premium Gift Box Collection",
+      description: "Kotak hadiah premium dengan 30 cookie spesial dan aksesori eksklusif",
+      image: "/images/giftbox3.png",
+      badge: "NEW",
+      badgeColor: "from-[#9B59B6] to-[#8E44AD]"
+    }
+  ];
+
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
   };
@@ -94,8 +131,23 @@ export default function Home() {
           }
         }
 
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         .animate-float {
           animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-fadeInUp {
+          animation: fadeInUp 0.8s ease-out forwards;
         }
       `}</style>
       
@@ -245,45 +297,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section id="products" className="py-24 px-6 bg-white">
-        <div className="container mx-auto max-w-[1200px]">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black text-[#0F1B3D] mb-4">
-              Featured Collections
+      {/* Featured Products Section - Shop Fan Favorites */}
+      <section id="products" className="py-24 px-6 bg-[#F5E6D3]">
+        <div className="container mx-auto max-w-[1400px]">
+          <div className="text-left mb-16">
+            <h2 className="text-5xl md:text-6xl font-black text-[#0033A0] mb-2">
+              Shop Fan Favorites
             </h2>
-            <p className="text-lg text-[#4A5568]">
-              Koleksi spesial kami yang dibuat dengan penuh cinta
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
+          <div className="grid md:grid-cols-4 gap-8">
+            {fanFavorites.map((product) => (
               <div 
                 key={product.id} 
-                className="group relative bg-white rounded-3xl overflow-hidden border-4 border-[#0F1B3D] hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+                className="relative bg-white rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group shadow-lg hover:shadow-2xl flex flex-col h-full"
               >
-                <div 
-                  className="h-64 flex items-center justify-center text-8xl relative overflow-hidden"
-                  style={{ backgroundColor: product.color }}
-                >
-                  {product.tags.length > 0 && (
-                    <div className="absolute top-4 right-4 bg-[#0F1B3D] text-white text-xs font-black px-4 py-2 rounded-full uppercase tracking-wider">
-                      {product.tags[0]}
+                {/* Badge */}
+                <div className="absolute top-4 left-4 z-20">
+                  <div className="relative">
+                    <div className={`bg-gradient-to-r ${product.badgeColor} rounded-full px-4 py-2 transform -rotate-6 shadow-lg`}>
+                      <span className="text-white font-black text-xs uppercase tracking-wider">
+                        {product.badge}
+                      </span>
                     </div>
-                  )}
-                  <div className="transform group-hover:scale-110 transition-transform duration-300">
-                    {product.image}
                   </div>
                 </div>
-                <div className="p-8 text-center">
-                  <h3 className="text-xl font-black text-[#0F1B3D] mb-3 uppercase tracking-wide">
+
+                {/* Product Image - MORE SPACE */}
+                <div className="h-80 overflow-hidden flex items-center justify-center p-6">
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+
+                {/* Product Info - Less prominent */}
+                <div className="p-6 pt-4 mt-auto">
+                  <h3 className="text-xl font-black text-[#0033A0] mb-3">
                     {product.name}
                   </h3>
-                  <p className="text-3xl font-bold text-[#8B4444] mb-4">{product.price}</p>
-                  <button className="w-full bg-[#0033A0] text-white py-4 rounded-full font-bold text-sm hover:bg-[#002080] transition-all duration-300 uppercase tracking-widest">
-                    Add to Cart
-                  </button>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {product.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -291,118 +349,240 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Flavors Section */}
-      <section className="py-24 px-6 bg-[#FFF8F3]">
-        <div className="container mx-auto max-w-[1200px]">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black text-[#0F1B3D] mb-4">
-              Rasa yang Tersedia
-            </h2>
-            <p className="text-lg text-[#4A5568]">
-              Pilih rasa favorit Anda dan buat momen spesial lebih manis
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { name: 'Classic Chocolate Chip', price: 'Rp 65.000', emoji: '🍫' },
-              { name: 'Red Velvet Heart', price: 'Rp 75.000', emoji: '❤️' },
-              { name: 'Butter Vanilla Dream', price: 'Rp 60.000', emoji: '🌟' }
-            ].map((flavor) => (
-              <div 
-                key={flavor.name} 
-                className="bg-white p-8 rounded-3xl text-center hover:shadow-xl transition-all duration-300 border-3 border-[#0F1B3D] hover:-translate-y-2 cursor-pointer group"
-              >
-                <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {flavor.emoji}
+      {/* Testimonial Section */}
+      <section className="py-24 px-6 bg-white">
+        <div className="container mx-auto max-w-[900px]">
+          <div className="relative">
+            {/* Frame/border khusus untuk gambar cookies */}
+            <div className="absolute inset-0 z-0">
+              {/* Cookie 1 - Kiri Atas */}
+              <div className="absolute -top-6 -left-6 z-0 w-24 h-24 bg-white rounded-full p-2 shadow-lg border-2 border-[#F5E6D3]">
+                <div className="w-full h-full flex items-center justify-center rounded-full overflow-hidden bg-gradient-to-br from-[#F5E6D3] to-[#FFE4E9]">
+                  <img 
+                    src="/images/cookie1.png" 
+                    alt="Cookie 1" 
+                    className="w-full h-full object-contain p-2"
+                  />
                 </div>
-                <h3 className="text-xl font-black text-[#0F1B3D] mb-3 uppercase tracking-wide">
-                  {flavor.name}
-                </h3>
-                <p className="text-2xl font-bold text-[#8B4444]">{flavor.price}</p>
-                <p className="text-sm text-[#4A5568] mt-2">per box</p>
               </div>
-            ))}
+
+              {/* Cookie 2 - Kanan Atas */}
+              <div className="absolute -top-6 -right-6 z-0 w-24 h-24 bg-white rounded-full p-2 shadow-lg border-2 border-[#F5E6D3]">
+                <div className="w-full h-full flex items-center justify-center rounded-full overflow-hidden bg-gradient-to-br from-[#D4E9FF] to-[#E6E6FA]">
+                  <img 
+                    src="/images/cookie2.png" 
+                    alt="Cookie 2" 
+                    className="w-full h-full object-contain p-2"
+                  />
+                </div>
+              </div>
+
+              {/* Cookie 3 - Bawah Tengah */}
+              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-0 w-28 h-28 bg-white rounded-full p-2 shadow-lg border-2 border-[#F5E6D3]">
+                <div className="w-full h-full flex items-center justify-center rounded-full overflow-hidden bg-gradient-to-br from-[#FFD4DD] to-[#FFE4E9]">
+                  <img 
+                    src="/images/cookie3.png" 
+                    alt="Cookie 3" 
+                    className="w-full h-full object-contain p-2"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Card Container dengan padding ekstra untuk gambar */}
+            <div className="relative z-10 bg-white border-2 border-gray-200 rounded-2xl p-10 md:p-12 shadow-lg hover:shadow-xl transition-all duration-300 mt-12 mb-12 mx-6">
+              
+              {/* Cookie Images di sudut-sudut - seperti contoh gambar */}
+              {/* Cookie Kiri Atas */}
+              <div className="absolute -top-16 -left-16 w-32 h-32 md:w-40 md:h-40 z-20 drop-shadow-2xl">
+                <img 
+                  src="/images/cookie13.png" 
+                  alt="Cookie decoration" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* Cookie Kanan Atas */}
+              <div className="absolute -top-12 -right-12 w-28 h-28 md:w-36 md:h-36 z-20 drop-shadow-2xl" style={{ animation: 'float 3.5s ease-in-out infinite' }}>
+                <img 
+                  src="/images/cookie40.png" 
+                  alt="Cookie decoration" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* Cookie Kiri Bawah */}
+              <div className="absolute -bottom-14 -left-14 w-36 h-36 md:w-44 md:h-44 z-20 drop-shadow-2xl" style={{ animation: 'float 4s ease-in-out infinite' }}>
+                <img 
+                  src="/images/cookie10.png" 
+                  alt="Cookie decoration" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* Cookie Kanan Bawah - Hidden on mobile for cleaner look */}
+              <div className="hidden md:block absolute -bottom-10 -right-10 w-32 h-32 md:w-40 md:h-40 z-20 drop-shadow-2xl" style={{ animation: 'float 3.2s ease-in-out infinite' }}>
+                <img 
+                  src="/images/cookie3.png" 
+                  alt="Cookie decoration" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* Quote marks - kiri atas */}
+              <div className="absolute top-4 left-8 text-[#FF6B6B] text-5xl md:text-6xl font-serif">
+                "
+              </div>
+
+              {/* Main quote text */}
+              <blockquote className="mb-8 relative z-10">
+                <p className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-[#333333] leading-[1.4] text-center px-4 md:px-8">
+                  "Among local cookie mavens, they're considered as much a New York culinary icon as a Katz's hot dog or a Di Fara slice. Tourists bucket-list them. New Yorkers line up for them."
+                </p>
+              </blockquote>
+
+              {/* Quote marks - kanan bawah */}
+              <div className="absolute bottom-4 right-8 text-[#FF6B6B] text-5xl md:text-6xl font-serif transform rotate-180">
+                "
+              </div>
+
+              {/* Divider line - simple */}
+              <div className="flex justify-center my-8">
+                <div className="w-24 h-1 bg-[#0033A0] rounded-full"></div>
+              </div>
+
+              {/* Source - simple centered text */}
+              <div className="text-center">
+                <p className="text-2xl md:text-3xl font-bold text-[#0033A0] tracking-wide">
+                  NY Magazine
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Event Section */}
-      <section id="event" className="py-24 px-6 bg-white">
-        <div className="container mx-auto max-w-[1100px]">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black text-[#0F1B3D] mb-4">
-              Upcoming Events
-            </h2>
-            <p className="text-lg text-[#4A5568]">
-              Ikuti workshop dan event spesial kami
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-[#FFE4E9] to-[#FFD4DD] p-10 rounded-3xl border-3 border-[#0F1B3D] hover:shadow-xl transition-all duration-300">
-              <div className="text-5xl mb-4">🎨</div>
-              <h3 className="text-2xl font-black text-[#0F1B3D] mb-4 uppercase">
-                Cookie Decorating Workshop
-              </h3>
-              <p className="text-[#4A5568] mb-4 leading-relaxed">
-                Belajar menghias cookie dengan teknik profesional. Cocok untuk pemula!
-              </p>
-              <p className="text-sm font-bold text-[#8B4444]">📅 Setiap Sabtu | ⏰ 10:00 - 12:00</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#D4E9FF] to-[#B8DAFF] p-10 rounded-3xl border-3 border-[#0F1B3D] hover:shadow-xl transition-all duration-300">
-              <div className="text-5xl mb-4">💝</div>
-              <h3 className="text-2xl font-black text-[#0F1B3D] mb-4 uppercase">
-                Valentine's Day Special
-              </h3>
-              <p className="text-[#4A5568] mb-4 leading-relaxed">
-                Pre-order sekarang dan dapatkan free greeting card & special packaging!
-              </p>
-              <p className="text-sm font-bold text-[#8B4444]">📅 14 Februari 2026 | 🎁 Limited Stock</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-24 px-6 bg-[#FFF8F3]">
-        <div className="container mx-auto max-w-[1200px]">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-black text-[#0F1B3D] mb-4">
-              Mengapa Rosé Crumbls?
+      {/* Cookies for Every Occasion Section - Background matched to Fan Favorites */}
+      <section id="occasions" className="py-24 px-6 bg-[#F5E6D3]">
+        <div className="container mx-auto max-w-[1400px]">
+          <div className="text-left mb-16">
+            <h2 className="text-5xl md:text-6xl font-black text-[#0033A0] mb-4">
+              Cookies for Every Occasion
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { 
-                icon: '👩‍🍳', 
-                title: 'Handcrafted dengan Cinta', 
-                desc: 'Setiap cookie dibuat dengan tangan menggunakan resep keluarga yang telah teruji' 
-              },
-              { 
-                icon: '🌟', 
-                title: 'Bahan Premium', 
-                desc: 'Hanya menggunakan butter Prancis, cokelat Belgia, dan bahan pilihan terbaik' 
-              },
-              { 
-                icon: '🎁', 
-                title: 'Packaging Cantik', 
-                desc: 'Kemasan eksklusif yang siap dijadikan hadiah untuk orang terkasih' 
-              }
-            ].map((feature, idx) => (
-              <div 
-                key={idx} 
-                className="bg-white rounded-3xl p-10 shadow-md hover:shadow-xl transition-all duration-300 border-3 border-[#0F1B3D] text-center hover:-translate-y-2"
-              >
-                <div className="text-7xl mb-6">{feature.icon}</div>
-                <h3 className="text-2xl font-black text-[#0F1B3D] mb-4 uppercase tracking-wide">
-                  {feature.title}
-                </h3>
-                <p className="text-[#4A5568] leading-relaxed">{feature.desc}</p>
+            {/* Corporate Gifts */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
+              <div className="relative h-72 overflow-hidden">
+                <img 
+                  src="/images/giftbox1.png" 
+                  alt="Corporate Gifts" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
               </div>
-            ))}
+              <div className="p-8">
+                <h3 className="text-3xl font-black text-[#0033A0] mb-4">
+                  Corporate Gifts
+                </h3>
+                <p className="text-[#4A5568] mb-6 leading-relaxed">
+                  Welcome back team members, reconnect with clients, or make new introductions with cookies delivered straight to their door.
+                </p>
+                <Link 
+                  href="#corporate" 
+                  className="inline-flex items-center text-[#0033A0] font-bold text-sm uppercase tracking-wider hover:gap-3 transition-all group"
+                >
+                  <span>SHOP CORPORATE</span>
+                  <span className="ml-2 group-hover:ml-4 transition-all">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Events */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
+              <div className="relative h-72 overflow-hidden">
+                <img 
+                  src="/images/giftbox2.png" 
+                  alt="Events" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-3xl font-black text-[#0033A0] mb-4">
+                  Events
+                </h3>
+                <p className="text-[#4A5568] mb-6 leading-relaxed">
+                  Whatever the occasion, our single-wrapped, fresh-baked cookies are a perfect dessert or sweet party favor for your guests.
+                </p>
+                <Link 
+                  href="/Event" 
+                  className="inline-flex items-center text-[#0033A0] font-bold text-sm uppercase tracking-wider hover:gap-3 transition-all group"
+                >
+                  <span>SHOP EVENTS</span>
+                  <span className="ml-2 group-hover:ml-4 transition-all">→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Catering */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
+              <div className="relative h-72 overflow-hidden">
+                <img 
+                  src="/images/giftbox.png" 
+                  alt="Catering" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-3xl font-black text-[#0033A0] mb-4">
+                  Catering
+                </h3>
+                <p className="text-[#4A5568] mb-6 leading-relaxed">
+                  Add a little 'mmm' to your pitch, brunch, birthday, or book club. Build the perfect spread with classic cookies, breads, and morning goodies.
+                </p>
+                <Link 
+                  href="#catering" 
+                  className="inline-flex items-center text-[#0033A0] font-bold text-sm uppercase tracking-wider hover:gap-3 transition-all group"
+                >
+                  <span>SHOP CATERING</span>
+                  <span className="ml-2 group-hover:ml-4 transition-all">→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Cookie That Became a New York Institution Section - Background now White */}
+      <section className="py-24 px-6 bg-white">
+        <div className="container mx-auto max-w-[1400px]">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left - Image */}
+            <div className="relative">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/images/bakery.jpg" 
+                  alt="Pam & Connie - Friends & Founders of Levain Bakery" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Right - Content */}
+            <div>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-[#0033A0] mb-8 leading-tight">
+                The Cookie That Became a New York Institution
+              </h2>
+              
+              <p className="text-lg md:text-xl text-[#4A5568] mb-8 leading-relaxed">
+                In 1995, our shared passion for breads urged us to open a little neighborhood bakery on W. 74th Street. One day, we baked BIG, hearty, gooey cookies and after a short article in The New York Times described them as "what may possibly be the largest, most divine chocolate chip cookies in Manhattan," our little shop became an overnight sensation — and we've been baking every since.
+              </p>
+
+              <div className="text-lg md:text-xl text-[#0033A0] font-bold">
+                <p className="mb-1">Pam & Connie</p>
+                <p className="text-[#4A5568] font-normal">Friends & Founders of Levain</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -425,39 +605,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-6 bg-[#0F1B3D]">
-        <div className="container mx-auto">
-          <div className="text-center mb-10">
-            <h3 className="text-4xl md:text-5xl font-black text-white mb-3 italic tracking-tight">
-              Rosé Crumbls
-            </h3>
-            <p className="text-white/80 text-lg font-medium">A Little Love in Every Crumbs ❤️</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-10 text-center text-white/70 text-sm max-w-4xl mx-auto mb-10">
-            <div>
-              <p className="font-bold mb-3 text-white text-base uppercase tracking-wider">Hubungi Kami</p>
-              <p className="mb-1">📧 hello@rosecrumbls.com</p>
-              <p>📱 +62 812-3456-7890</p>
-            </div>
-            <div>
-              <p className="font-bold mb-3 text-white text-base uppercase tracking-wider">Jam Operasional</p>
-              <p className="mb-1">Senin - Jumat: 09:00 - 18:00</p>
-              <p>Sabtu - Minggu: 10:00 - 16:00</p>
-            </div>
-            <div>
-              <p className="font-bold mb-3 text-white text-base uppercase tracking-wider">Follow Us</p>
-              <p className="mb-1">📷 @rosecrumbls</p>
-              <p>🎵 @rosecrumbls</p>
-            </div>
-          </div>
-          
-          <div className="pt-8 border-t border-white/20 text-center text-white/60 text-sm">
-            <p>© 2026 Rosé Crumbls. All rights reserved. Made with ❤️ in Jakarta</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
     </>
   );

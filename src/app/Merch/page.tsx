@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Header from '../../Components/Header';
+import Footer from '../../Components/Footer'; // <-- Import Footer
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,8 +13,9 @@ export default function MerchPage() {
     { id: 3, name: 'ROSE DREES', price: 'Rp 350.000', tags: ['Valentine Edition', 'NEW'], category: 'BAJU', image: '/images/dressvalentine01.png' },
     { id: 4, name: 'Red Bow Earrings', price: 'Rp 150.000', tags: ['Valentine Edition','NEW'], category: 'AKSESORI', image: '/images/modelanting.png' },
     { id: 5, name: 'TOTEBAG', price: 'Rp 120.000', tags: ['Valentine Edition','NEW'], category: 'AKSESORI', image: '/images/totebag01.png' },
-    { id: 7, name: 'CLASSIC ROSE CAP', price: 'Rp 150.000', tags: [], category: 'TOPI', image: '/images/cap.png' },
-    { id: 8, name: 'CLASSIC ROSE CAP', price: 'Rp 150.000', tags: [], category: 'TOPI', image: '/images/cap.png' },
+    { id: 6, name: 'TUMBLR', price: 'Rp 250.000', tags: [], category: 'AKSESORI', image: '/images/botol01.png' },
+    { id: 7, name: 'BAG CHARM CAT', price: 'Rp 40.000', tags: [], category: 'AKSESORI', image: '/images/ganci3.png' },
+    { id: 8, name: 'PINK HAT', price: 'Rp 100.000', tags: ['Coquette Plaid Edition', 'SOLD'], category: 'TOPI', image: '/images/Hat5.png' },
   ];
 
   const [activeFilter, setActiveFilter] = useState('ALL');
@@ -37,11 +39,29 @@ export default function MerchPage() {
       <Header />
 
       <section className="w-full">
+
         <div className="relative w-full h-[400px] md:h-[550px] bg-[#EE215A] overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#EE215A] to-[#8B4444] opacity-95"></div>
-          <div className="relative h-full flex flex-col items-center justify-center text-center px-6 z-10 text-white">
-            <h2 className="text-5xl md:text-8xl font-black italic tracking-tighter leading-none mb-4 uppercase">LOVE ALWAYS</h2>
-            <p className="text-lg md:text-xl font-bold uppercase tracking-[0.4em] mb-8">Available Now</p>
+
+          {/* 1. Gambar Background Banner */}
+          <Image 
+            src="/images/banner.png" // <-- GANTI DENGAN PATH GAMBAR KAMU
+            alt="Valentine Banner"
+            fill 
+            priority
+            className="object-cover" 
+          />
+
+          {/* 2. Overlay Gradient (Agar teks LOVE ALWAYS tetap jelas) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#EE215A]/80 to-[#8B4444]/40 z-10"></div>
+          
+          {/* 3. Konten Teks di Atas Gambar */}
+          <div className="relative h-full flex flex-col items-center justify-center text-center px-6 z-20 text-white">
+            <h2 className="text-5xl md:text-8xl font-black italic tracking-tighter leading-none mb-4 uppercase drop-shadow-lg">
+              LOVE ALWAYS
+            </h2>
+            <p className="text-lg md:text-xl font-bold uppercase tracking-[0.4em] mb-8 drop-shadow-md">
+              Available Now
+            </p>
             <button 
               onClick={() => document.getElementById('all-merch')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-white text-black px-10 py-3 rounded-full font-bold uppercase hover:scale-105 transition-transform shadow-lg"
@@ -119,9 +139,8 @@ export default function MerchPage() {
         </section>
       </main>
 
-      <footer className="py-12 px-6 bg-[#E6D7C0] text-center">
-        <p className="font-black text-[#8B4444] uppercase tracking-[0.5em] text-xs">Rosé Crumbs Merch © 2024</p>
-      </footer>
+      {/* Ganti footer lama dengan Footer component */}
+      <Footer />
     </div>
   );
 }
@@ -137,11 +156,18 @@ function ProductCard({ item }: any) {
             {item.tags.map((tag: string) => (
               <span 
                 key={tag} 
-                className="bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase w-fit"
+                className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase w-fit ${
+                  tag === 'Valentine Edition' 
+                    ? 'bg-[#722F37] text-white' // Maroon, teks putih
+                    : tag === 'SOLD'
+                    ? 'bg-red-600 text-black'    // Merah, teks hitam (sesuai permintaan)
+                    : 'bg-[#FFB7B7] text-white'   // Pink untuk NEW/lainnya
+                }`}
               >
                 {tag}
               </span>
             ))}
+          
           </div>
 
           <Image src={item.image} alt={item.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
