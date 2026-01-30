@@ -2,6 +2,8 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Header from "../../Components/Header"; // Import Header
+import Footer from "../../Components/Footer"; // Import Footer
 import "./events.css";
 
 const events = [
@@ -22,31 +24,39 @@ export default function EventDashboard() {
   };
 
   return (
-    <main className="dashboard">
-      <section className="hero">
-        <h1>Weekly & Seasonal Events 🍪</h1>
-        <p>Limited edition cookies for every celebration</p>
-      </section>
+    <>
+      {/* Header */}
+      <Header />
+      
+      <main className="dashboard">
+        <section className="hero">
+          <h1>Weekly & Seasonal Events 🍪</h1>
+          <p>Limited edition cookies for every celebration</p>
+        </section>
 
-      <section className="slider-wrapper">
-        <button className="nav left" onClick={() => scroll("left")}>‹</button>
+        <section className="slider-wrapper">
+          <button className="nav left" onClick={() => scroll("left")}>‹</button>
 
-        <div className="slider" ref={sliderRef}>
-          {events.map((e) => (
-            <Link
-              key={e.slug}
-              href={`/Event/${e.slug}`}
-              className="event-slide"
-              style={{ backgroundImage: `url(${e.image})` }}
-            >
-              <div className="overlay" />
-              <h2>{e.title}</h2>
-            </Link>
-          ))}
-        </div>
+          <div className="slider" ref={sliderRef}>
+            {events.map((e) => (
+              <Link
+                key={e.slug}
+                href={`/Event/${e.slug}`}
+                className="event-slide"
+                style={{ backgroundImage: `url(${e.image})` }}
+              >
+                <div className="overlay" />
+                <h2>{e.title}</h2>
+              </Link>
+            ))}
+          </div>
 
-        <button className="nav right" onClick={() => scroll("right")}>›</button>
-      </section>
-    </main>
+          <button className="nav right" onClick={() => scroll("right")}>›</button>
+        </section>
+      </main>
+      
+      {/* Footer */}
+      <Footer />
+    </>
   );
 }
