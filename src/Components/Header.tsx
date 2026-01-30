@@ -64,7 +64,7 @@ export default function Header() {
                 scrolled ? 'w-16 h-16' : 'w-24 h-24'
               }`}>
                 <Image
-                  src="/images/logokueh.png"
+                  src="/images/logo-text.png"
                   alt="Rose Crumbs Logo"
                   fill
                   className="object-contain"
