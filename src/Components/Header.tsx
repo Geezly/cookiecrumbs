@@ -19,7 +19,7 @@ export default function Header() {
   }, [scrolled]);
 
   const menuItems = [
-    { name: 'Order', href: '#order' },
+    { name: 'Order', href: '/Order' },
     { name: 'Event', href: '#event' },
     { name: 'Merch', href: '/Merch' },
   ];

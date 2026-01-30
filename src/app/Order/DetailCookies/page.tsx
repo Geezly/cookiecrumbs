@@ -1,196 +1,171 @@
 'use client';
 
-import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { Suspense, useState } from 'react';
 
-const cookies = [
+const cookiesData = [
   {
     slug: "choco-chip-1",
-    name: "Chocolate Chip",
-    price: "Rp 25.000",
+    name: "CHOCOLATE CHIP",
+    price: 25000,
     image: "/images/cookie-original.png",
-    desc: "Coklat chip premium dengan adonan lembut",
-    badge: "BEST SELLER",
-    badgeColor: "bg-[#FF6B6B]",
+    desc: "Coklat chip premium dengan adonan lembut. Nikmati perpaduan klasik keping cokelat yang meleleh di setiap gigitan.",
     bgColor: "bg-[#B8E6E6]",
   },
   {
     slug: "red-velvet-1",
-    name: "Red Velvet",
-    price: "Rp 28.000",
+    name: "RED VELVET",
+    price: 28000,
     image: "/images/cookie-redvv.png",
-    desc: "Red velvet dengan cream cheese topping",
-    badge: "LIMITED EDITION",
-    badgeColor: "bg-[#FF69B4]",
+    desc: "Red velvet dengan cream cheese topping. Warna merah merona mewah dengan tekstur lembut dan rasa yang autentik.",
     bgColor: "bg-[#FFB6C1]",
   },
   {
     slug: "matcha-1",
-    name: "Matcha Cookies",
-    price: "Rp 27.000",
+    name: "MATCHA COOKIES",
+    price: 27000,
     image: "/images/cookie-matcha.png",
-    desc: "Matcha Jepang dengan rasa creamy",
-    badge: "NEW",
-    badgeColor: "bg-[#4ECDC4]",
+    desc: "Matcha Jepang dengan rasa creamy. Menggunakan bubuk matcha pilihan untuk aroma teh hijau yang menenangkan.",
     bgColor: "bg-[#C8E6C9]",
   },
   {
     slug: "almond-1",
-    name: "Almond Cookies",
-    price: "Rp 30.000",
+    name: "ALMOND COOKIES",
+    price: 30000,
     image: "/images/cookie-almond.png",
-    desc: "Taburan almond panggang renyah",
-    badge: "PREMIUM",
-    badgeColor: "bg-[#FFD700]",
+    desc: "Taburan almond panggang renyah. Memberikan tekstur crunchy yang sempurna bagi pecinta kacang almond.",
     bgColor: "bg-[#D4C5F9]",
   },
   {
     slug: "Oat-1",
-    name: "Cookie Oat",
-    price: "Rp 26.000",
+    name: "COOKIE OAT",
+    price: 26000,
     image: "/images/cookie-Oat.png",
-    desc: "Selai kacang creamy dengan choco chips",
-    badge: "NEW",
-    badgeColor: "bg-[#4ECDC4]",
+    desc: "Selai kacang creamy dengan choco chips. Pilihan lezat dengan tekstur gandum yang kaya akan serat.",
     bgColor: "bg-[#F5DEB3]",
   },
   {
     slug: "Cookie-Ice-1",
-    name: "Cookie Ice Cream",
-    price: "Rp 29.000",
+    name: "COOKIE ICE CREAM",
+    price: 29000,
     image: "/images/cookie-ice.png",
-    desc: "Dark chocolate dengan white chocolate chips",
-    badge: "BEST SELLER",
-    badgeColor: "bg-[#FF6B6B]",
+    desc: "Dark chocolate dengan white chocolate chips. Sensasi rasa es krim dalam bentuk cookies yang memanjakan lidah.",
     bgColor: "bg-[#DEB887]",
   },
   {
     slug: "cookie-mint-1",
-    name: "Mint Chocolate Cookies",
-    price: "Rp 28.000",
+    name: "MINT CHOCOLATE COOKIES",
+    price: 28000,
     image: "/images/cookie-mint.png",
-    desc: "Mint segar dengan dark chocolate chunks",
-    badge: "LIMITED EDITION",
-    badgeColor: "bg-[#FF69B4]",
+    desc: "Mint segar dengan dark chocolate chunks. Perpaduan rasa dingin yang unik dan cokelat yang pekat.",
     bgColor: "bg-[#98FB98]",
   },
   {
     slug: "cookie-choco-lava-1",
-    name: "Chocolate Lava Cookies",
-    price: "Rp 32.000",
+    name: "CHOCOLATE LAVA COOKIES",
+    price: 32000,
     image: "/images/cookie-lava.png",
-    desc: "Lelehan coklat premium di dalam cookies renyah",
-    badge: "PREMIUM",
-    badgeColor: "bg-[#FFD700]",
+    desc: "Lelehan coklat premium di dalam cookies renyah. Kejutan cokelat cair yang lumer saat dinikmati.",
     bgColor: "bg-[#8B4513]",
   },
 ];
 
-export default function DetailCookiesPage() {
+function CookieDetailContent() {
+  const searchParams = useSearchParams();
+  const slug = searchParams.get('slug');
+  const [packSize, setPackSize] = useState('4-PACK');
+
+  const item = cookiesData.find((c) => c.slug === slug);
+
+  if (!item) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
+        <Link href="/Order" className="text-[#8B4444] font-bold border-b border-[#8B4444] tracking-widest text-xs uppercase">
+          Kembali ke Menu
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <>
-      {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#E6D7C0] border-b-2 border-[#8B4444]/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-8">
-            <Link href="/Order" className="text-[#8B4444] font-bold text-xs uppercase tracking-widest hover:underline">
-              Order
-            </Link>
-            <Link href="/Event" className="text-[#8B4444] font-bold text-xs uppercase tracking-widest hover:underline">
-              Event
-            </Link>
-            <Link href="/Merch" className="text-[#8B4444] font-bold text-xs uppercase tracking-widest hover:underline">
-              Merch
-            </Link>
+    <div className="min-h-screen bg-[#FDFBF7] pt-32 pb-20 px-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+        
+        {/* KIRI: IMAGE SECTION */}
+        <div className="w-full md:w-1/2">
+          <div className={`aspect-square ${item.bgColor} rounded-[2.5rem] border border-[#D4AF37]/20 flex items-center justify-center p-12 shadow-sm relative`}>
+             {/* Subtle Gold Badge */}
+             <div className="absolute top-6 right-6 px-4 py-1 border border-[#D4AF37] rounded-full">
+                <span className="text-[8px] font-bold text-[#D4AF37] tracking-[0.2em]">ORIGINAL RECIPE</span>
+             </div>
+            <img 
+              src={item.image} 
+              alt={item.name} 
+              className="w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        </div>
+
+        {/* KANAN: INFO SECTION */}
+        <div className="w-full md:w-1/2 flex flex-col">
+          <Link href="/Order" className="text-[#8B4444] text-[10px] font-bold tracking-[0.4em] mb-8 flex items-center gap-2 group uppercase">
+            <span className="group-hover:-translate-x-1 transition-transform italic text-lg leading-none">‹</span> GO BACK
+          </Link>
+
+          <h1 className="text-5xl font-black text-[#1A1A2E] mb-3 tracking-tighter uppercase leading-none">
+            {item.name}
+          </h1>
+          
+          <p className="text-3xl font-bold text-[#8B4444] mb-10 tracking-tighter">
+            Rp {item.price.toLocaleString('id-ID')}
+          </p>
+
+          <div className="mb-10">
+            <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Product Detail</h3>
+            <p className="text-gray-600 leading-relaxed font-light italic text-lg">
+              "{item.desc}"
+            </p>
           </div>
 
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2">
-            <img src="/images/logo-topbot.png" alt="Logo" className="h-18" />
-          </Link>
+          {/* SIZE SELECTOR */}
+          <div className="mb-12">
+            <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-5">Select Pack Size</h3>
+            <div className="flex gap-4">
+              {['4-PACK', '8-PACK', '12-PACK'].map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setPackSize(size)}
+                  className={`flex-1 py-4 border rounded-xl text-[10px] font-bold tracking-[0.2em] transition-all duration-300 ${
+                    packSize === size 
+                      ? 'bg-[#1A1A2E] border-[#1A1A2E] text-white shadow-lg -translate-y-1' 
+                      : 'bg-white border-gray-100 text-gray-400 hover:border-[#D4AF37]/50 hover:text-[#D4AF37]'
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
 
-          <Link
-            href="/Order"
-            className="bg-[#8B4444] text-white px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#6B3434] transition"
-          >
-            Order Now
-          </Link>
-        </div>
-      </nav>
-
-      <div className="min-h-screen bg-[#F5F1E8] pt-32 pb-20 px-6">
-        {/* HEADER */}
-        <div className="text-center mb-16">
-          <h1 className="text-6xl md:text-7xl font-black text-[#1A1A2E] mb-4 tracking-tighter uppercase leading-none">
-            OUR COOKIEZZ
-          </h1>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-            Koleksi cookies premium kami yang dibuat dengan penuh cinta
+          {/* ADD TO CART */}
+          <button className="w-full bg-[#8B4444] text-white font-bold py-6 rounded-2xl uppercase tracking-[0.4em] text-[11px] hover:bg-[#6B3434] transition-all shadow-xl shadow-[#8B4444]/10 active:scale-[0.98]">
+            Add to Cart
+          </button>
+          
+          <p className="mt-8 text-center text-[9px] text-gray-400 uppercase tracking-widest font-medium">
+            Hand-baked with love in Rosé Crumbs kitchen
           </p>
         </div>
-
-        {/* COOKIE GRID - Ukuran Dirapikan (items-stretch) */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
-          {cookies.map((item) => (
-            <Link key={item.slug} href={`/Order/DetailCookies/${item.slug}`} className="group flex">
-              <div className="relative w-full flex flex-col bg-white border-4 border-black rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                
-                {/* BADGE */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className={`${item.badgeColor} text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter`}>
-                    {item.badge}
-                  </span>
-                </div>
-
-                {/* IMAGE SECTION */}
-                <div className={`${item.bgColor} p-6 flex items-center justify-center h-[280px] flex-shrink-0`}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-44 h-44 object-cover rounded-full shadow-xl group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-
-                {/* INFO SECTION - Font Mirip Merch (Bold Black) */}
-                <div className="p-6 text-center bg-white flex-grow flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-[15px] font-black text-[#1A1A2E] mb-2 uppercase tracking-tighter group-hover:text-[#8B4444] transition-colors leading-tight">
-                      {item.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 mb-4 line-clamp-2">
-                      {item.desc}
-                    </p>
-                  </div>
-                  <p className="text-xl font-black text-[#8B4444] tracking-tighter uppercase">
-                    {item.price}
-                  </p>
-                </div>
-
-                {/* HOVER OVERLAY */}
-                <div className="absolute inset-0 bg-[#1A1A2E]/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6">
-                  <h3 className="text-white text-xl font-black uppercase tracking-tighter mb-2">
-                    {item.name}
-                  </h3>
-                  <p className="text-white/90 text-xs px-2">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* BACK BUTTON */}
-        <div className="text-center mt-16">
-          <Link
-            href="/Order"
-            className="inline-flex items-center gap-2 text-[#1A1A2E] font-black uppercase text-xs tracking-widest hover:underline"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Kembali ke Menu Order
-          </Link>
-        </div>
       </div>
-    </>
+    </div>
+  );
+}
+
+export default function DetailCookiesPage() {
+  return (
+    <Suspense fallback={null}>
+      <CookieDetailContent />
+    </Suspense>
   );
 }
