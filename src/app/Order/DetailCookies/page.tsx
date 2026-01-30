@@ -170,12 +170,9 @@ export default function DetailCookiesPage() {
                   <h3 className="text-white text-2xl font-bold mb-3">
                     {item.name}
                   </h3>
-                  <p className="text-white/90 text-sm mb-4">
+                  <p className="text-white/90 text-sm">
                     {item.desc}
                   </p>
-                  <div className="bg-white text-[#1A1A2E] px-6 py-2 rounded-full font-bold">
-                    Lihat Detail
-                  </div>
                 </div>
               </div>
             </Link>
