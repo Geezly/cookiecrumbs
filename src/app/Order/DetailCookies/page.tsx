@@ -1,4 +1,5 @@
-// src/app/Order/DetailCookies/page.tsx
+'use client';
+
 import Link from "next/link";
 
 const cookies = [
@@ -9,7 +10,7 @@ const cookies = [
     image: "/images/cookie-original.png",
     desc: "Coklat chip premium dengan adonan lembut",
     badge: "BEST SELLER",
-    badgeColor: "bg-[#FF6B6B]", // merah
+    badgeColor: "bg-[#FF6B6B]",
     bgColor: "bg-[#B8E6E6]",
   },
   {
@@ -19,7 +20,7 @@ const cookies = [
     image: "/images/cookie-redvv.png",
     desc: "Red velvet dengan cream cheese topping",
     badge: "LIMITED EDITION",
-    badgeColor: "bg-[#FF69B4]", // pink
+    badgeColor: "bg-[#FF69B4]",
     bgColor: "bg-[#FFB6C1]",
   },
   {
@@ -29,7 +30,7 @@ const cookies = [
     image: "/images/cookie-matcha.png",
     desc: "Matcha Jepang dengan rasa creamy",
     badge: "NEW",
-    badgeColor: "bg-[#4ECDC4]", // tosca
+    badgeColor: "bg-[#4ECDC4]",
     bgColor: "bg-[#C8E6C9]",
   },
   {
@@ -39,7 +40,7 @@ const cookies = [
     image: "/images/cookie-almond.png",
     desc: "Taburan almond panggang renyah",
     badge: "PREMIUM",
-    badgeColor: "bg-[#FFD700]", // gold
+    badgeColor: "bg-[#FFD700]",
     bgColor: "bg-[#D4C5F9]",
   },
   {
@@ -49,7 +50,7 @@ const cookies = [
     image: "/images/cookie-Oat.png",
     desc: "Selai kacang creamy dengan choco chips",
     badge: "NEW",
-    badgeColor: "bg-[#4ECDC4]", // tosca
+    badgeColor: "bg-[#4ECDC4]",
     bgColor: "bg-[#F5DEB3]",
   },
   {
@@ -59,7 +60,7 @@ const cookies = [
     image: "/images/cookie-ice.png",
     desc: "Dark chocolate dengan white chocolate chips",
     badge: "BEST SELLER",
-    badgeColor: "bg-[#FF6B6B]", // merah
+    badgeColor: "bg-[#FF6B6B]",
     bgColor: "bg-[#DEB887]",
   },
   {
@@ -69,7 +70,7 @@ const cookies = [
     image: "/images/cookie-mint.png",
     desc: "Mint segar dengan dark chocolate chunks",
     badge: "LIMITED EDITION",
-    badgeColor: "bg-[#FF69B4]", // pink
+    badgeColor: "bg-[#FF69B4]",
     bgColor: "bg-[#98FB98]",
   },
   {
@@ -79,7 +80,7 @@ const cookies = [
     image: "/images/cookie-lava.png",
     desc: "Lelehan coklat premium di dalam cookies renyah",
     badge: "PREMIUM",
-    badgeColor: "bg-[#FFD700]", // gold
+    badgeColor: "bg-[#FFD700]",
     bgColor: "bg-[#8B4513]",
   },
 ];
@@ -91,13 +92,13 @@ export default function DetailCookiesPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#E6D7C0] border-b-2 border-[#8B4444]/20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-8">
-            <Link href="/Order" className="text-[#8B4444] font-semibold hover:underline">
+            <Link href="/Order" className="text-[#8B4444] font-bold text-xs uppercase tracking-widest hover:underline">
               Order
             </Link>
-            <Link href="/Event" className="text-[#8B4444] font-semibold hover:underline">
+            <Link href="/Event" className="text-[#8B4444] font-bold text-xs uppercase tracking-widest hover:underline">
               Event
             </Link>
-            <Link href="/Merch" className="text-[#8B4444] font-semibold hover:underline">
+            <Link href="/Merch" className="text-[#8B4444] font-bold text-xs uppercase tracking-widest hover:underline">
               Merch
             </Link>
           </div>
@@ -108,18 +109,17 @@ export default function DetailCookiesPage() {
 
           <Link
             href="/Order"
-            className="bg-[#8B4444] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#6B3434] transition"
+            className="bg-[#8B4444] text-white px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#6B3434] transition"
           >
             Order Now
           </Link>
         </div>
       </nav>
 
-      {/* MAIN CONTENT */}
       <div className="min-h-screen bg-[#F5F1E8] pt-32 pb-20 px-6">
         {/* HEADER */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-black text-[#1A1A2E] mb-4">
+          <h1 className="text-6xl md:text-7xl font-black text-[#1A1A2E] mb-4 tracking-tighter uppercase leading-none">
             OUR COOKIEZZ
           </h1>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto">
@@ -127,50 +127,49 @@ export default function DetailCookiesPage() {
           </p>
         </div>
 
-        {/* COOKIE GRID */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* COOKIE GRID - Ukuran Dirapikan (items-stretch) */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
           {cookies.map((item) => (
-            <Link
-              key={item.slug}
-              href={`/Order/DetailCookies/${item.slug}`}
-              className="group"
-            >
-              <div className="relative bg-white border-4 border-black rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                {/* BADGE dengan warna berbeda */}
-                <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-                  <span className={`${item.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full`}>
+            <Link key={item.slug} href={`/Order/DetailCookies/${item.slug}`} className="group flex">
+              <div className="relative w-full flex flex-col bg-white border-4 border-black rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                
+                {/* BADGE */}
+                <div className="absolute top-4 left-4 z-10">
+                  <span className={`${item.badgeColor} text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter`}>
                     {item.badge}
                   </span>
                 </div>
 
-                {/* IMAGE SECTION dengan background warna */}
-                <div className={`${item.bgColor} p-6 flex items-center justify-center h-[280px]`}>
+                {/* IMAGE SECTION */}
+                <div className={`${item.bgColor} p-6 flex items-center justify-center h-[280px] flex-shrink-0`}>
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-48 h-48 object-cover rounded-full shadow-xl group-hover:scale-110 transition-transform duration-500"
+                    className="w-44 h-44 object-cover rounded-full shadow-xl group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
 
-                {/* INFO SECTION */}
-                <div className="p-6 text-center bg-white">
-                  <h3 className="text-xl font-black text-[#1A1A2E] mb-2 group-hover:text-[#8B4444] transition-colors">
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                    {item.desc}
-                  </p>
-                  <p className="text-2xl font-bold text-[#8B4444]">
+                {/* INFO SECTION - Font Mirip Merch (Bold Black) */}
+                <div className="p-6 text-center bg-white flex-grow flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-[15px] font-black text-[#1A1A2E] mb-2 uppercase tracking-tighter group-hover:text-[#8B4444] transition-colors leading-tight">
+                      {item.name}
+                    </h3>
+                    <p className="text-xs text-gray-500 mb-4 line-clamp-2">
+                      {item.desc}
+                    </p>
+                  </div>
+                  <p className="text-xl font-black text-[#8B4444] tracking-tighter uppercase">
                     {item.price}
                   </p>
                 </div>
 
-                {/* HOVER OVERLAY dengan desc lengkap */}
+                {/* HOVER OVERLAY */}
                 <div className="absolute inset-0 bg-[#1A1A2E]/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6">
-                  <h3 className="text-white text-2xl font-bold mb-3">
+                  <h3 className="text-white text-xl font-black uppercase tracking-tighter mb-2">
                     {item.name}
                   </h3>
-                  <p className="text-white/90 text-sm">
+                  <p className="text-white/90 text-xs px-2">
                     {item.desc}
                   </p>
                 </div>
@@ -183,20 +182,10 @@ export default function DetailCookiesPage() {
         <div className="text-center mt-16">
           <Link
             href="/Order"
-            className="inline-flex items-center gap-2 text-[#1A1A2E] font-semibold hover:underline"
+            className="inline-flex items-center gap-2 text-[#1A1A2E] font-black uppercase text-xs tracking-widest hover:underline"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Kembali ke Menu Order
           </Link>
