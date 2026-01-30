@@ -12,56 +12,28 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-    }, 4000); // Ganti slide setiap 4 detik
+    }, 4000);
 
-    return () => clearInterval(interval); // Cleanup saat component unmount
+    return () => clearInterval(interval);
   }, []);
 
-  const featuredProducts = [
-    { 
-      id: 1, 
-      name: 'VALENTINE COOKIE TIN', 
-      price: 'Rp 350.000', 
-      tags: ['LIMITED EDITION'], 
-      image: '🎁',
-      color: '#FFB4C8'
-    },
-    { 
-      id: 2, 
-      name: 'CLASSIC ASSORTMENT', 
-      price: 'Rp 275.000', 
-      tags: ['BEST SELLER'], 
-      image: '🍪',
-      color: '#A8D8EA'
-    },
-    { 
-      id: 3, 
-      name: 'PREMIUM GIFT BOX', 
-      price: 'Rp 425.000', 
-      tags: ['PREMIUM'], 
-      image: '💝',
-      color: '#C9B8E8'
-    },
-  ];
-
-  // Carousel slides data - dengan gambar full
   const carouselSlides = [
     {
       id: 1,
       title: 'Valentine Cookie Tin',
-      image: '/images/cookie7.png', // Ganti dengan path gambar Anda
+      image: '/images/cookie7.png',
       alt: 'Valentine Cookie Tin Limited Edition'
     },
     {
       id: 2,
       title: 'Classic Assortment Box',
-      image: '/images/cookie31.png', // Ganti dengan path gambar Anda
+      image: '/images/cookie31.png',
       alt: 'Classic Assortment Cookie Box'
     },
     {
       id: 3,
       title: 'Premium Gift Collection',
-      image: '/images/cookie32.png', // Ganti dengan path gambar Anda
+      image: '/images/cookie32.png',
       alt: 'Premium Gift Cookie Collection'
     },
   ];
@@ -74,7 +46,8 @@ export default function Home() {
       description: "Kaleng eksklusif berisi 24 cookie spesial Valentine dengan desain romantis",
       image: "/images/cookie7.png",
       badge: "LIMITED EDITION",
-      badgeColor: "from-[#FF6B6B] to-[#FF8E53]"
+      badgeColor: "from-[#FF6B6B] to-[#FF8E53]",
+      link: "/Order/DetailCookies"
     },
     {
       id: 2,
@@ -82,7 +55,8 @@ export default function Home() {
       description: "18 cookie cokelat gelap dengan rasa musim dingin yang kaya dan hangat",
       image: "/images/cookie17.png",
       badge: "SEASONAL",
-      badgeColor: "from-[#0033A0] to-[#0066CC]"
+      badgeColor: "from-[#0033A0] to-[#0066CC]",
+      link: "/Order/DetailCookies"
     },
     {
       id: 3,
@@ -90,7 +64,8 @@ export default function Home() {
       description: "Koleksi 20 cookie terbaik dengan berbagai rasa klasik pilihan pelanggan",
       image: "/images/cookie6.png",
       badge: "BEST SELLER",
-      badgeColor: "from-[#00A86B] to-[#00CC88]"
+      badgeColor: "from-[#00A86B] to-[#00CC88]",
+      link: "/Order/DetailCookies"
     },
     {
       id: 4,
@@ -98,7 +73,8 @@ export default function Home() {
       description: "Kotak hadiah premium dengan 30 cookie spesial dan aksesori eksklusif",
       image: "/images/giftbox3.png",
       badge: "NEW",
-      badgeColor: "from-[#9B59B6] to-[#8E44AD]"
+      badgeColor: "from-[#9B59B6] to-[#8E44AD]",
+      link: "/Order/DetailCookies"
     }
   ];
 
@@ -154,9 +130,8 @@ export default function Home() {
       <div className="min-h-screen bg-[#FFF8F3]">
       <Header />
       
-      {/* Hero Section - Inspired by reference but unique layout */}
+      {/* Hero Section */}
       <section className="relative pt-28 pb-20 px-6 overflow-hidden">
-        {/* Decorative background pattern */}
         <div className="absolute inset-0 opacity-[0.03]">
           <div className="absolute inset-0" style={{
             backgroundImage: `repeating-linear-gradient(45deg, #8B4444 0px, #8B4444 2px, transparent 2px, transparent 10px)`,
@@ -172,21 +147,21 @@ export default function Home() {
               </h1>
               
               <p className="text-lg lg:text-xl text-[#4A5568] mb-10 leading-relaxed max-w-xl">
-                Kaleng cookie edisi terbatas Valentine's Day kami adalah hadiah sempurna untuk persahabatan, hubungan, dan segala yang ada di antaranya.
+                Rosie Crumbs kami adalah hadiah sempurna untuk persahabatan, hubungan, dan segala yang ada di antaranya.
               </p>
 
               <Link 
-                href="#products" 
+                href="/Order" 
                 className="inline-block bg-[#0033A0] text-white px-12 py-5 rounded-full font-bold text-base hover:bg-[#002080] transition-all duration-300 transform hover:scale-105 shadow-2xl uppercase tracking-widest"
               >
                 Shop All Cookies
               </Link>
             </div>
 
-            {/* Right Visual - CAROUSEL Gift boxes */}
+            {/* Right Visual - CAROUSEL */}
             <div className="order-1 lg:order-2 relative">
               <div className="relative aspect-square max-w-[550px] mx-auto">
-                {/* Star Badge - positioned at top-right corner */}
+                {/* Star Badge */}
                 <div className="absolute -top-8 -right-8 z-30 animate-float">
                   <div className="relative">
                     <svg width="140" height="140" viewBox="0 0 140 140" className="transform -rotate-12 drop-shadow-2xl">
@@ -203,7 +178,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Main red background card - CAROUSEL CONTAINER */}
+                {/* Main carousel container */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#FF4757] via-[#FF6B7A] to-[#FF8FA3] rounded-[3rem] shadow-2xl transform rotate-2 overflow-hidden">
                   
                   {/* Pink striped floor */}
@@ -219,29 +194,24 @@ export default function Home() {
                     </svg>
                   </div>
 
-                  {/* CAROUSEL: Full images that slide */}
+                  {/* Carousel slides */}
                   <div className="absolute inset-0 flex items-center justify-center p-8">
                     <div className="relative w-full h-full">
-                      
-                      {/* Carousel slides dengan gambar full */}
                       {carouselSlides.map((slide, index) => (
                         <div
                           key={slide.id}
                           className={`absolute inset-0 transition-all duration-700 ease-in-out ${
                             index === currentSlide 
                               ? 'opacity-100 scale-100 z-10' 
-                              : index < currentSlide
-                              ? 'opacity-0 scale-95 z-0'
                               : 'opacity-0 scale-95 z-0'
                           }`}
                         >
-                          {/* Full image container dengan animasi mengambang */}
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="relative w-full h-full max-h-[85%] flex items-center justify-center">
                               <img
                                 src={slide.image}
                                 alt={slide.alt}
-                                className="w-full h-full object-contain drop-shadow-2xl animate-float-slow"
+                                className="w-full h-full object-contain drop-shadow-2xl"
                                 style={{
                                   animation: 'floatSlow 3s ease-in-out infinite'
                                 }}
@@ -250,7 +220,6 @@ export default function Home() {
                           </div>
                         </div>
                       ))}
-
                     </div>
                   </div>
 
@@ -308,9 +277,10 @@ export default function Home() {
 
           <div className="grid md:grid-cols-4 gap-8">
             {fanFavorites.map((product) => (
-              <div 
-                key={product.id} 
-                className="relative bg-white rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group shadow-lg hover:shadow-2xl flex flex-col h-full"
+              <Link
+                key={product.id}
+                href={product.link}
+                className="group relative bg-white rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col h-full"
               >
                 {/* Badge */}
                 <div className="absolute top-4 left-4 z-20">
@@ -334,16 +304,19 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Product Info - Less prominent */}
+                {/* Product Info */}
                 <div className="p-6 pt-4 mt-auto">
                   <h3 className="text-xl font-black text-[#0033A0] mb-3">
                     {product.name}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
                     {product.description}
                   </p>
+                  <div className="w-full bg-[#0033A0] text-white py-3 rounded-full font-bold text-sm hover:bg-[#002080] transition-all duration-300 uppercase tracking-widest text-center">
+                    View Details
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -562,7 +535,7 @@ export default function Home() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img 
                   src="/images/bakery.jpg" 
-                  alt="Pam & Connie - Friends & Founders of Levain Bakery" 
+                  alt="Friends & Founders of Rosie Crumbs" 
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -579,8 +552,7 @@ export default function Home() {
               </p>
 
               <div className="text-lg md:text-xl text-[#0033A0] font-bold">
-                <p className="mb-1">Pam & Connie</p>
-                <p className="text-[#4A5568] font-normal">Friends & Founders of Levain</p>
+                <p className="text-[#4A5568] font-normal">Friends & Founders of Rosie Crumbs</p>
               </div>
             </div>
           </div>
@@ -597,7 +569,7 @@ export default function Home() {
             Jangan lewatkan koleksi edisi terbatas kami. Order sekarang dan rasakan kebahagiaan dalam setiap gigitan!
           </p>
           <Link 
-            href="#order" 
+            href="/Order" 
             className="inline-block bg-white text-[#8B4444] px-14 py-6 rounded-full font-black text-lg hover:bg-[#0F1B3D] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-2xl uppercase tracking-widest"
           >
             Pesan Sekarang
