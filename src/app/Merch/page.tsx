@@ -14,6 +14,7 @@ export default function MerchPage() {
     { id: 5, name: 'TOTEBAG', price: 'Rp 120.000', tags: ['Valentine Edition','NEW'], category: 'AKSESORI', image: '/images/totebag01.png' },
     { id: 6, name: 'TUMBLR', price: 'Rp 250.000', tags: [], category: 'AKSESORI', image: '/images/botol01.png' },
     { id: 7, name: 'BAG CHARM CAT', price: 'Rp 40.000', tags: [], category: 'AKSESORI', image: '/images/ganci3.png' },
+    { id: 8, name: 'PINK HAT', price: 'Rp 100.000', tags: ['Coquette Plaid Edition', 'SOLD'], category: 'TOPI', image: '/images/Hat5.png' },
   ];
 
   const [activeFilter, setActiveFilter] = useState('ALL');
@@ -182,18 +183,21 @@ function ProductCard({ item }: any) {
           
           {/* Container Tag: items-start memastikan tag tidak melebar penuh */}
           <div className="absolute top-3 left-3 flex flex-col items-start gap-1 z-10">
-           {item.tags.map((tag: string) => (
-            <span 
-              key={tag} 
-              className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase w-fit text-white ${
-                tag === 'Valentine Edition' 
-                  ? 'bg-[#722F37]' // Warna Maroon untuk Valentine
-                  : 'bg-[#FFB7B7]' // Warna Pink untuk NEW
-              }`}
-            >
-              {tag}
-            </span>
-          ))}
+            {item.tags.map((tag: string) => (
+              <span 
+                key={tag} 
+                className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase w-fit ${
+                  tag === 'Valentine Edition' 
+                    ? 'bg-[#722F37] text-white' // Maroon, teks putih
+                    : tag === 'SOLD'
+                    ? 'bg-red-600 text-black'    // Merah, teks hitam (sesuai permintaan)
+                    : 'bg-[#FFB7B7] text-white'   // Pink untuk NEW/lainnya
+                }`}
+              >
+                {tag}
+              </span>
+            ))}
+          
           </div>
 
           <Image src={item.image} alt={item.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />

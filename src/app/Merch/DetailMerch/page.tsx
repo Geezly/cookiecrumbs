@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react'; // Tambah useEffect
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Header from '../../../Components/Header';
 import Image from 'next/image';
@@ -37,7 +37,7 @@ export default function DetailMerchPage() {
       category: 'BAJU', 
       images: ['/images/dressvalentine01.png'], 
       tags: ['Valentine Edition', 'NEW'], 
-      desc: 'Gaun ini mengusung gaya Vintage-Romantic atau yang sering disebut dengan tren Coquette Aesthetic. Penggunaan skema warna kontras antara Bold Maroon (merah marun) dan Broken White (putih tulang) memberikan kesan elegan namun tetap manis." yang manis, sangat cocok untuk menemani waktu santai di pagi hari atau sebagai kado spesial untuk orang tersayang.' 
+      desc: 'Gaun ini mengusung gaya Vintage-Romantic atau yang sering disebut dengan tren Coquette Aesthetic. Penggunaan skema warna kontras antara Bold Maroon (merah marun) dan Broken White (putih tulang) memberikan kesan elegan namun tetap manis.' 
     },
     { 
       id: 4, 
@@ -64,9 +64,9 @@ export default function DetailMerchPage() {
       category: 'AKSESORIS', 
       images: ['/images/botol01.png'], 
       tags: [], 
-      desc: 'Lengkapi koleksi eksklusif Anda dengan Rose Crumbs Signature Tumblr, bagian dari koleksi resmi official merchandise kami. Dirancang dengan estetika vintage-romantic yang manis, tumbler ini bukan sekadar wadah minuman, melainkan pernyataan gaya bagi para pecinta keindahan.' 
+      desc: 'Lengkapi koleksi eksklusif Anda dengan Rose Crumbs Signature Tumblr, bagian dari koleksi resmi official merchandise kami.' 
     },
-     { 
+    { 
       id: 7, 
       name: 'BAG CHARM CAT', 
       price: 'Rp 40.000', 
@@ -75,16 +75,23 @@ export default function DetailMerchPage() {
       tags: [], 
       desc: 'Sentuhan kecil yang membawa perubahan besar pada penampilan tas Anda. Gantungan tas (bag charm) ini dirancang khusus untuk Anda yang menyukai detail handmade yang unik, manis, dan penuh karakter.' 
     },
+    { 
+      id: 8, 
+      name: 'PINK HAT', 
+      price: 'Rp 100.000', 
+      category: 'TOPI', 
+      images: ['/images/Hat5.png'], 
+      tags: ['Coquette Plaid Edition', 'SOLD'] ,
+      desc: 'Bawa nuansa romantis dan tren terkini ke dalam lemari pakaian Anda dengan Pink Hat – Coquette Plaid Edition.' 
+    },
   ], []);
 
-  // Cari produk berdasarkan ID
   const product = useMemo(() => {
     return allProducts.find((p) => p.id === Number(id));
   }, [id, allProducts]);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Reset index gambar jika produk berubah
   useEffect(() => {
     setActiveImageIndex(0);
   }, [id]);
@@ -97,7 +104,6 @@ export default function DetailMerchPage() {
     }
   };
 
-  // 1. Validasi awal: Jika ID belum ada atau produk tidak ditemukan
   if (!id || !product) return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#FFF8F0]">
       <p className="font-bold text-[#8B4444] text-xl mb-4 uppercase">
@@ -111,9 +117,8 @@ export default function DetailMerchPage() {
 
   const isBaju = product.category === 'BAJU';
   const sizeOptions = isBaju ? ['S', 'M', 'L', 'XL', 'XXL'] : ['S', 'M', 'L'];
-
-  // Safety check untuk src gambar
   const mainImageSrc = product.images?.[activeImageIndex] || '';
+  const isSoldOut = product.tags.includes('SOLD');
 
   return (
     <div className="min-h-screen bg-[#FFF8F0] flex flex-col font-sans">
@@ -148,13 +153,7 @@ export default function DetailMerchPage() {
                     activeImageIndex === index ? 'border-[#8B4444]' : 'border-transparent hover:border-gray-300'
                   }`}
                 >
-                  <Image 
-                    src={img} 
-                    alt={`thumb-${index}`} 
-                    fill 
-                    className="object-contain p-1"
-                    sizes="100px" 
-                  />
+                  <Image src={img} alt={`thumb-${index}`} fill className="object-contain p-1" sizes="100px" />
                 </button>
               ))}
             </div>
@@ -162,16 +161,8 @@ export default function DetailMerchPage() {
             {/* Main Image */}
             <div className="flex-grow flex justify-center items-start">
               <div className="relative w-full aspect-square max-w-[600px] bg-[#F7F4F0] rounded-[40px] overflow-hidden shadow-sm border border-[#E6D7C0]">
-                {/* FIX: Hanya render Image jika mainImageSrc tersedia */}
                 {mainImageSrc && (
-                  <Image 
-                    src={mainImageSrc} 
-                    alt={product.name} 
-                    fill 
-                    className="object-contain p-4 lg:p-1 transition-opacity duration-200"
-                    priority 
-                    sizes="(max-width: 768px) 100vw, 600px"
-                  />
+                  <Image src={mainImageSrc} alt={product.name} fill className="object-contain p-4 lg:p-1" priority sizes="(max-width: 768px) 100vw, 600px" />
                 )}
               </div>
             </div>
@@ -180,7 +171,16 @@ export default function DetailMerchPage() {
             <div className="w-full lg:w-[450px] flex flex-col">
               <div className="flex gap-2 mb-6">
                 {product.tags?.map(tag => (
-                  <span key={tag} className="bg-black text-white text-[10px] font-black px-3 py-1 rounded-md tracking-tighter uppercase">
+                  <span 
+                    key={tag} 
+                    className={`text-[10px] font-black px-3 py-1 rounded-md tracking-tighter uppercase ${
+                        tag === 'SOLD' 
+                        ? 'bg-red-600 text-black' 
+                        : tag === 'Valentine Edition' 
+                        ? 'bg-[#722F37] text-white' 
+                        : 'bg-black text-white'
+                    }`}
+                  >
                     {tag}
                   </span>
                 ))}
@@ -200,7 +200,10 @@ export default function DetailMerchPage() {
                   <label className="text-[11px] font-black text-[#333] uppercase mb-3 block tracking-widest">Size</label>
                   <select 
                     defaultValue="" 
-                    className="w-full bg-white border border-gray-300 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-[#8B4444] appearance-none cursor-pointer text-gray-800"
+                    disabled={isSoldOut}
+                    className={`w-full border rounded-2xl px-6 py-4 text-sm font-bold outline-none appearance-none cursor-pointer ${
+                        isSoldOut ? 'bg-gray-100 text-gray-400 border-gray-200' : 'bg-white border-gray-300 text-gray-800 focus:border-[#8B4444]'
+                    }`}
                   >
                     <option value="" disabled>Select Size</option>
                     {sizeOptions.map(size => (
@@ -211,8 +214,13 @@ export default function DetailMerchPage() {
                 </div>
               </div>
 
-              <button className="w-full bg-black text-white py-6 rounded-full font-black uppercase tracking-[0.2em] hover:bg-[#222] transition-all shadow-xl active:scale-[0.98]">
-                Add to Cart
+              <button 
+                disabled={isSoldOut}
+                className={`w-full py-6 rounded-full font-black uppercase tracking-[0.2em] transition-all shadow-xl active:scale-[0.98] ${
+                    isSoldOut ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-black text-white hover:bg-[#222]'
+                }`}
+              >
+                {isSoldOut ? 'Sold Out' : 'Add to Cart'}
               </button>
             </div>
           </div>
