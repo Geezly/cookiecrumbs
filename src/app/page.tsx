@@ -548,7 +548,7 @@ export default function Home() {
               </h2>
               
               <p className="text-lg md:text-xl text-[#4A5568] mb-8 leading-relaxed">
-                In 1995, our shared passion for breads urged us to open a little neighborhood bakery on W. 74th Street. One day, we baked BIG, hearty, gooey cookies and after a short article in The New York Times described them as "what may possibly be the largest, most divine chocolate chip cookies in Manhattan," our little shop became an overnight sensation — and we've been baking every since.
+                Di Rosé Crumbs, kami terobsesi dengan presisi. Setiap cookie dikurasi dengan keseimbangan rasa yang pas—tidak terlalu manis, namun kaya akan tekstur. Dengan bagian tengah yang ultra-gooey dan tepian yang crisp, ini adalah evolusi dari chocolate chip cookie yang pernah kamu kenal.
               </p>
 
               <div className="text-lg md:text-xl text-[#0033A0] font-bold">
