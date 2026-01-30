@@ -56,6 +56,24 @@ const cookies = [
     badge: "BEST SELLER",
     bgColor: "bg-[#DEB887]", // warna coklat muda
   },
+  {
+    slug: "cookie-mint-1",
+    name: "Mint Chocolate Cookies",
+    price: "Rp 28.000",
+    image: "/images/cookie-mint.png",
+    desc: "Mint segar dengan dark chocolate chunks",
+    badge: "LIMITED EDITION",
+    bgColor: "bg-[#98FB98]",
+  },
+  {
+    slug: "cookie-choco-lava-1",
+    name: "Chocolate Lava Cookies",
+    price: "Rp 32.000",
+    image: "/images/cookie-lava.png",
+    desc: "Lelehan coklat premium di dalam cookies renyah",
+    badge: "PREMIUM",
+    bgColor: "bg-[#8B4513]",
+  },
 ];
 
 export default function DetailCookiesPage() {
