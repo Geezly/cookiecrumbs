@@ -20,7 +20,9 @@ export default function Header() {
 
   const menuItems = [
     { name: 'Order', href: '/Order' },
-    { name: 'Event', href: '#event' },
+
+    { name: 'Event', href: '/Event' },
+
     { name: 'Merch', href: '/Merch' },
   ];
 

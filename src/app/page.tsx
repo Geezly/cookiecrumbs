@@ -488,7 +488,7 @@ export default function Home() {
                   Whatever the occasion, our single-wrapped, fresh-baked cookies are a perfect dessert or sweet party favor for your guests.
                 </p>
                 <Link 
-                  href="#events" 
+                  href="/Event" 
                   className="inline-flex items-center text-[#0033A0] font-bold text-sm uppercase tracking-wider hover:gap-3 transition-all group"
                 >
                   <span>SHOP EVENTS</span>
