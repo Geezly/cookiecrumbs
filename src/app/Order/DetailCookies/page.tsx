@@ -9,6 +9,7 @@ const cookies = [
     image: "/images/cookie-original.png",
     desc: "Coklat chip premium dengan adonan lembut",
     badge: "BEST SELLER",
+    badgeColor: "bg-[#FF6B6B]", // merah
     bgColor: "bg-[#B8E6E6]",
   },
   {
@@ -18,6 +19,7 @@ const cookies = [
     image: "/images/cookie-redvv.png",
     desc: "Red velvet dengan cream cheese topping",
     badge: "LIMITED EDITION",
+    badgeColor: "bg-[#FF69B4]", // pink
     bgColor: "bg-[#FFB6C1]",
   },
   {
@@ -27,6 +29,7 @@ const cookies = [
     image: "/images/cookie-matcha.png",
     desc: "Matcha Jepang dengan rasa creamy",
     badge: "NEW",
+    badgeColor: "bg-[#4ECDC4]", // tosca
     bgColor: "bg-[#C8E6C9]",
   },
   {
@@ -36,6 +39,7 @@ const cookies = [
     image: "/images/cookie-almond.png",
     desc: "Taburan almond panggang renyah",
     badge: "PREMIUM",
+    badgeColor: "bg-[#FFD700]", // gold
     bgColor: "bg-[#D4C5F9]",
   },
   {
@@ -45,7 +49,8 @@ const cookies = [
     image: "/images/cookie-Oat.png",
     desc: "Selai kacang creamy dengan choco chips",
     badge: "NEW",
-    bgColor: "bg-[#F5DEB3]", // warna wheat/cream
+    badgeColor: "bg-[#4ECDC4]", // tosca
+    bgColor: "bg-[#F5DEB3]",
   },
   {
     slug: "Cookie-Ice-1",
@@ -54,7 +59,8 @@ const cookies = [
     image: "/images/cookie-ice.png",
     desc: "Dark chocolate dengan white chocolate chips",
     badge: "BEST SELLER",
-    bgColor: "bg-[#DEB887]", // warna coklat muda
+    badgeColor: "bg-[#FF6B6B]", // merah
+    bgColor: "bg-[#DEB887]",
   },
   {
     slug: "cookie-mint-1",
@@ -63,6 +69,7 @@ const cookies = [
     image: "/images/cookie-mint.png",
     desc: "Mint segar dengan dark chocolate chunks",
     badge: "LIMITED EDITION",
+    badgeColor: "bg-[#FF69B4]", // pink
     bgColor: "bg-[#98FB98]",
   },
   {
@@ -72,6 +79,7 @@ const cookies = [
     image: "/images/cookie-lava.png",
     desc: "Lelehan coklat premium di dalam cookies renyah",
     badge: "PREMIUM",
+    badgeColor: "bg-[#FFD700]", // gold
     bgColor: "bg-[#8B4513]",
   },
 ];
@@ -128,9 +136,9 @@ export default function DetailCookiesPage() {
               className="group"
             >
               <div className="relative bg-white border-4 border-black rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                {/* BADGE */}
+                {/* BADGE dengan warna berbeda */}
                 <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-                  <span className="bg-[#1A1A2E] text-white text-xs font-bold px-3 py-1 rounded-full">
+                  <span className={`${item.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full`}>
                     {item.badge}
                   </span>
                 </div>
