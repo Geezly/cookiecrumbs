@@ -1,24 +1,24 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
 
-export default function ProductCard({ name, image, slug }: any) {
+export default function ProductCard({ name, image }: any) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-4">
-      <Image
-        src={image}
-        alt={name}
-        width={300}
-        height={300}
-        className="rounded-xl"
-      />
-      <h4 className="mt-4 text-lg font-semibold">{name}</h4>
+    <div className="group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-pink-500 transition-all">
+      <div className="animate-fadeIn">
+        <Image
+          src={image}
+          alt={name}
+          fill
+          className="object-cover group-hover:scale-110 transition duration-500"
+        />
+      </div>
 
-      <Link
-        href={`/order/${slug}`}
-        className="inline-block mt-4 px-5 py-2 bg-black text-white rounded-full"
-      >
-        Order
-      </Link>
+      <div className="p-4 text-center">
+        <h3 className="text-white font-semibold group-hover:text-pink-400">
+          {name}
+        </h3>
+      </div>
     </div>
   );
 }
