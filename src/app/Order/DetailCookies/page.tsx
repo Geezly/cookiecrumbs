@@ -3,8 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Suspense, useState } from 'react';
-import Header from '../../../Components/Header'; // sesuaikan path jika perlu
-import Footer from '../../../Components/Footer'; // sesuaikan path jika perlu
+import Header from '../../../Components/Header'; 
+import Footer from '../../../Components/Footer'; 
 
 const cookiesData = [
   {
@@ -83,7 +83,7 @@ function CookieDetailContent() {
   if (!item) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
-        <Link href="/Order" className="text-[#8B4444] font-bold border-b border-[#8B4444] tracking-widest text-xs uppercase">
+        <Link href="/Order" className="text-[#8B4444] font-bold border-b border-[#8B4444] tracking-widest text-xs uppercase transition-opacity hover:opacity-70">
           Kembali ke Menu
         </Link>
       </div>
@@ -92,17 +92,14 @@ function CookieDetailContent() {
 
   return (
     <>
-      {/* Header */}
       <Header />
 
-      {/* Main Content */}
-      <div className="min-h-screen bg-[#FDFBF7] pt-32 pb-20 px-6">
+      <div className="min-h-screen bg-[#FDFBF7] pt-40 pb-20 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center">
           
           {/* KIRI: IMAGE SECTION */}
           <div className="w-full md:w-1/2">
-            <div className={`aspect-square ${item.bgColor} rounded-[2.5rem] border border-[#D4AF37]/20 flex items-center justify-center p-12 shadow-sm relative`}>
-               {/* Subtle Gold Badge */}
+            <div className={`aspect-square ${item.bgColor} rounded-[2.5rem] border border-[#D4AF37]/20 flex items-center justify-center p-12 shadow-sm relative transition-all duration-500`}>
                <div className="absolute top-6 right-6 px-4 py-1 border border-[#D4AF37] rounded-full">
                   <span className="text-[8px] font-bold text-[#D4AF37] tracking-[0.2em]">ORIGINAL RECIPE</span>
                </div>
@@ -116,7 +113,8 @@ function CookieDetailContent() {
 
           {/* KANAN: INFO SECTION */}
           <div className="w-full md:w-1/2 flex flex-col">
-            <Link href="/Order" className="text-[#8B4444] text-[10px] font-bold tracking-[0.4em] mb-8 flex items-center gap-2 group uppercase">
+            {/* Navigasi Go Back ke halaman Order utama */}
+            <Link href="/Order" className="text-[#8B4444] text-[10px] font-bold tracking-[0.4em] mb-8 flex items-center gap-2 group uppercase transition-opacity hover:opacity-70">
               <span className="group-hover:-translate-x-1 transition-transform italic text-lg leading-none">‹</span> GO BACK
             </Link>
 
@@ -128,7 +126,7 @@ function CookieDetailContent() {
               Rp {item.price.toLocaleString('id-ID')}
             </p>
 
-            <div className="mb-10">
+            <div className="mb-10 border-t border-[#D4AF37]/10 pt-6">
               <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Product Detail</h3>
               <p className="text-gray-600 leading-relaxed font-light italic text-lg">
                 "{item.desc}"
@@ -160,14 +158,13 @@ function CookieDetailContent() {
               Add to Cart
             </button>
             
-            <p className="mt-8 text-center text-[9px] text-gray-400 uppercase tracking-widest font-medium">
+            <p className="mt-8 text-center text-[9px] text-gray-400 uppercase tracking-widest font-medium italic">
               Hand-baked with love in Rosé Crumbs kitchen
             </p>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </>
   );
@@ -175,7 +172,7 @@ function CookieDetailContent() {
 
 export default function DetailCookiesPage() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center text-[#8B4444] font-bold animate-pulse">LOADING...</div>}>
       <CookieDetailContent />
     </Suspense>
   );
